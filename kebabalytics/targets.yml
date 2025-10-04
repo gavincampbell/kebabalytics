@@ -1,0 +1,14 @@
+targets:
+  dev:
+
+    variables:
+
+      tags:
+        workload: kpis-dev
+
+  prod:
+
+    variables:
+
+      tags:
+        workload: kpis-dev

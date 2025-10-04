@@ -1,0 +1,48 @@
+# The main job for kebabalytics.
+resources:
+  jobs:
+    kebabalytics_job:
+      name: kebabalytics_job
+
+      trigger:
+        # Run this job every day, exactly one day from the last run; see https://docs.databricks.com/api/workspace/jobs/create#trigger
+        periodic:
+          interval: 1
+          unit: DAYS
+
+      #email_notifications:
+      #  on_failure:
+      #    - your_email@example.com
+
+      tasks:
+
+        - task_key: get_data
+          notebook_task:
+            notebook_path: ../src/setup.py
+
+        - task_key: import_sales
+          depends_on:
+            - task_key: get_data
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.kebabalytics_pipeline.id}
+
+        - task_key: generate_kpis
+          depends_on:
+            - task_key: import_sales
+          environment_key: default
+          python_wheel_task:
+            package_name: kebabalytics
+            entry_point: main
+            parameters:
+              - "${var.catalog_name}"
+      tags: ${var.tags}
+      # A list of task execution environment specifications that can be referenced by tasks of this job.
+      environments:
+        - environment_key: default
+
+          # Full documentation of this spec can be found at:
+          # https://docs.databricks.com/api/workspace/jobs/create#environments-spec
+          spec:
+            environment_version: "2"
+            dependencies:
+              - ../dist/*.whl

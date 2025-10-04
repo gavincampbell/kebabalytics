@@ -1,0 +1,49 @@
+# This is a Databricks asset bundle definition for kebabalytics.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: kebabalytics
+  uuid: c24361cd-683b-4868-81ae-e3d9123a0b1c
+
+artifacts:
+  python_artifact:
+    type: whl
+    build: uv build --wheel
+
+include:
+  - resources/*.yml
+  - resources/*/*.yml
+
+sync:
+  exclude:
+    - prereqs.sql
+    - README.md
+    - .vscode
+
+variables:
+  catalog_name:
+    description: the catalog for source and sink tables
+
+
+targets:
+  dev:
+    # The default target uses 'mode: development' to create a development copy.
+    # - Deployed resources get prefixed with '[dev my_user_name]'
+    # - Any job schedules and triggers are paused by default.
+    # See also https://docs.databricks.com/dev-tools/bundles/deployment-modes.html.
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-3fed3a50-f0ad.cloud.databricks.com
+    variables:
+      catalog_name: kebabalytics_dev
+
+  prod:
+    mode: production
+    workspace:
+      host: https://dbc-3fed3a50-f0ad.cloud.databricks.com
+      root_path: /Workspace/Bundles/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog_name: kebabalytics_prod
+    permissions:
+      - user_name: gavin@gavincampbell.dev
+        level: CAN_MANAGE

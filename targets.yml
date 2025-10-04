@@ -1,0 +1,27 @@
+targets:
+  dev:
+    # The default target uses 'mode: development' to create a development copy.
+    # - Deployed resources get prefixed with '[dev my_user_name]'
+    # - Any job schedules and triggers are paused by default.
+    # See also https://docs.databricks.com/dev-tools/bundles/deployment-modes.html.
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-3fed3a50-f0ad.cloud.databricks.com
+    variables:
+      catalog_name: kebabalytics_dev
+      tags:
+        env_name: dev
+
+  prod:
+    mode: production
+    workspace:
+      host: https://dbc-3fed3a50-f0ad.cloud.databricks.com
+      root_path: /Workspace/Bundles/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog_name: kebabalytics_prod
+      tags:
+        env_name: prod
+    permissions:
+      - user_name: gavin@gavincampbell.dev
+        level: CAN_MANAGE

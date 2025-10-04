@@ -1,0 +1,19 @@
+# This is a Databricks asset bundle definition for kebabalytics.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: kebabalytics_analysis
+  uuid: c24361cd-683b-4268-81ae-e3d9123a0b1c
+
+include:
+  - ../targets.yml
+  - resources/*.yml
+  - resources/*/*.yml
+
+variables:
+  catalog_name:
+    description: the catalog for source and sink tables
+  tags:
+    type: complex
+
+
+

@@ -1,0 +1,14 @@
+# The main pipeline for kebabalytics
+resources:
+  pipelines:
+    kebabalytics_pipeline:
+      name: kebabalytics_pipeline
+      catalog: ${var.catalog_name}
+      schema: default
+      serverless: true
+      libraries:
+        - notebook:
+            path: ../src/pipeline.ipynb
+
+      configuration:
+        bundle.sourcePath: ${workspace.file_path}/src

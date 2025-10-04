@@ -1,0 +1,21 @@
+resources:
+  jobs:
+    kebabalytics_analysis:
+      name: kebabalytics_analysis
+      email_notifications:
+        on_failure:
+          - gavin@gavincampbell.dev
+        no_alert_for_skipped_runs: true
+      trigger:
+        pause_status: UNPAUSED
+        periodic:
+          interval: 1
+          unit: DAYS
+      tasks:
+        - task_key: kebabalytics_analysis
+          notebook_task:
+            notebook_path: ../src/kebabalytics_analysis.ipynb
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
