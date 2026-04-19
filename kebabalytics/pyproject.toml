@@ -16,6 +16,9 @@ dev = [
     # than the remote cluster or serverless compute you connect to.
     # See also https://docs.databricks.com/dev-tools/databricks-connect.html.
     "databricks-connect>=15.4,<15.5",
+
+    # Python support for Declarative Automation Bundles
+    "databricks-bundles>=0.5.0",
 ]
 
 [tool.pytest.ini_options]

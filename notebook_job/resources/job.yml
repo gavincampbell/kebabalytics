@@ -4,7 +4,7 @@ resources:
       name: kebabalytics_analysis
       email_notifications:
         on_failure:
-          - gavin@gavincampbell.dev
+          - azure_demos@gavincampbell.dev
         no_alert_for_skipped_runs: true
       trigger:
         pause_status: UNPAUSED

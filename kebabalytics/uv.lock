@@ -88,6 +88,15 @@ wheels = [
 ]
 
 [[package]]
+name = "databricks-bundles"
+version = "0.295.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a1/b1/75b890d39b3db744dca14b61c3ec9d26996f225c86481cb0d1220e19bc9a/databricks_bundles-0.295.0.tar.gz", hash = "sha256:d895cc4c4f31e99f8a6678790231cb035afa4a83d0ba3fc0d4de18c42ccae921", size = 87457, upload-time = "2026-03-18T14:21:43.165Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d5/87/299719b0921b2313667514d38fd45a7c6ea9a638d018d2674193adad6550/databricks_bundles-0.295.0-py3-none-any.whl", hash = "sha256:e9bd64c53526d3ddaffd015d918c0ff846008d169e6eee1168791896b17a5a83", size = 178690, upload-time = "2026-03-18T14:21:41.661Z" },
+]
+
+[[package]]
 name = "databricks-connect"
 version = "15.4.15"
 source = { registry = "https://pypi.org/simple" }
@@ -138,7 +147,7 @@ name = "exceptiongroup"
 version = "1.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/0b/9f/a65090624ecf468cdca03533906e7c69ed7588582240cfe7cc9e770b50eb/exceptiongroup-1.3.0.tar.gz", hash = "sha256:b241f5885f560bc56a59ee63ca4c6a8bfa46ae4ad651af316d4e81817bb9fd88", size = 29749, upload-time = "2025-05-10T17:42:51.123Z" }
 wheels = [
@@ -261,6 +270,7 @@ source = { editable = "." }
 
 [package.dev-dependencies]
 dev = [
+    { name = "databricks-bundles" },
     { name = "databricks-connect" },
     { name = "databricks-dlt" },
     { name = "pytest" },
@@ -270,6 +280,7 @@ dev = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "databricks-bundles", specifier = ">=0.5.0" },
     { name = "databricks-connect", specifier = ">=15.4,<15.5" },
     { name = "databricks-dlt" },
     { name = "pytest" },

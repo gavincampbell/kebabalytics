@@ -5,10 +5,13 @@ resources:
       name: kebabalytics_pipeline
       catalog: ${var.catalog_name}
       schema: default
-      serverless: true
       libraries:
         - notebook:
             path: ../src/pipeline.ipynb
+
+      clusters:
+        - label: default
+          node_type_id: Standard_D4ps_v6
 
       configuration:
         bundle.sourcePath: ${workspace.file_path}/src
