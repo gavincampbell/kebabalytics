@@ -1,0 +1,20 @@
+# Declarative Automation Bundle definition for kebabalytics analysis.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: kebabalytics_analysis
+  uuid: c24361cd-683b-4268-81ae-e3d9123a0b1c
+  engine: direct
+
+include:
+  - ../targets.yml
+  - resources/*.yml
+  - resources/*/*.yml
+
+variables:
+  catalog_name:
+    description: the catalog for source and sink tables
+  tags:
+    type: complex
+
+
+

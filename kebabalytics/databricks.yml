@@ -1,0 +1,40 @@
+# Declarative Automation Bundle definition for kebabalytics.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: kebabalytics
+  uuid: c24361cd-683b-4868-81ae-e3d9123a0b1c
+  databricks_cli_version: ">= 0.279.0"
+
+artifacts:
+  python_artifact:
+    type: whl
+    build: uv build --wheel
+
+include:
+  - ../targets.yml
+  - resources/*.yml
+  - resources/*/*.yml
+
+sync:
+  exclude:
+    - prereqs.sql
+    - README.md
+    - .vscode
+
+python:
+  venv_path: .venv
+  mutators:
+    - "resources.mutators:add_email_notifications"
+
+scripts:
+  test:
+    content: "uv run pytest"
+
+variables:
+  catalog_name:
+    description: the catalog for source and sink tables
+  tags:
+    description: tags to apply to resources
+    type: complex
+
+
